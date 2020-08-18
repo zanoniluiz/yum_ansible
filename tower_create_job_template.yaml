@@ -23,10 +23,23 @@
         - { 'name': 'TESTE - Update Security Packages', 'tag': 'security' }
         - { 'name': 'TESTE - Update Bugfix Packages', 'tag': 'bugfix' }
 
-    - debug:
-        msg: "{{ item.id }}"
+    - set_fact:
+        UPDATEID: "{{ item.id }}"
       when: 'item.job_template == "TESTE - Update All Packages"'  
       loop: "{{ job_out.results }}"  
+      no_log: true
+
+    - set_fact:
+        BUGFIXID: "{{ item.id }}"
+      when: 'item.job_template == "TESTE - Update Bugfix Packages"'  
+      loop: "{{ job_out.results }}"  
+      no_log: true
+
+    - set_fact:
+        SECURITYID: "{{ item.id }}"
+      when: 'item.job_template == "TESTE - Update Security Packages"'  
+      loop: "{{ job_out.results }}"
+      no_log: true
 
     - name: Create Job Template with survey
       tower_job_template:
@@ -43,12 +56,16 @@
         survey_enabled: yes
         survey_spec: "{{ lookup('file', 'template/survey.json') }}"
        
-    - name: Configure Workflow Template
+    - name: Configure Workflow Schema
       replace:
-        path: template/workflow.yaml
-        regexp: 'ORGANIZATION'
-        replace: "{{ ORGANIZATION }}"
+        path: template/workflow_schema.json
+        regexp: "{{ item.src }}"
+        replace: "{{ item.dest }}"
         backup: true
+      loop:
+        - { 'src': 'UPDATE', 'dest': 'UPDATEID'}
+        - { 'src': 'BUGFIX', 'dest': 'BUGFIXID'}
+        - { 'src': 'SECURITY', 'dest': 'SECURITYID'}
 
     - name: Create Workflow Template
       tower_workflow_template:

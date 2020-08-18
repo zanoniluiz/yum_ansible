@@ -5,14 +5,14 @@
         "success_nodes": [
           {
             "id": 120,
-            "job_template": 30
+            "job_template": SECURITY
           }
         ],
         "id": 110,
-        "job_template": 31
+        "job_template": BUGFIX
       }
     ],
     "id": 100,
-    "job_template": 29
+    "job_template": UPDATE
   }
 ]
