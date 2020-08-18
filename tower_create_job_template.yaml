@@ -19,7 +19,7 @@
         state: present
       register: job_out  
       loop:
-        - { 'name': 'YUM - Update All Packages', 'tag': 'update' }
+        - { 'name': 'YUM - Update All Packages', 'tag': 'all' }
         - { 'name': 'YUM - Update Security Packages', 'tag': 'security' }
         - { 'name': 'YUM - Update Bugfix Packages', 'tag': 'bugfix' }
 
