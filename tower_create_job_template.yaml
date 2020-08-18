@@ -17,7 +17,7 @@
         job_tags: "{{ item.tag }}"
         become_enabled: yes
         state: present
-      register: job_template_out  
+      register: job_out  
       loop:
         - { 'name': 'TESTE - Update All Packages', 'tag': 'update' }
         - { 'name': 'TESTE - Update Security Packages', 'tag': 'security' }
@@ -26,7 +26,7 @@
     - debug:
         msg: "{{ item.id }}"
       when: 'item.job_template == "TESTE - Update All Packages"'  
-      loop: "{{ job_template_out.results }}"  
+      loop: "{{ job_out.results }}"  
 
     - name: Create Job Template with survey
       tower_job_template:
