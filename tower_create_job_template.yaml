@@ -23,9 +23,9 @@
         job_tags: "{{ item.tag }}"
         become_enabled: yes
         state: present
-        tower_host: "{{ TOWER_HOST }}"
-        tower_username: "{{ TOWER_USER }}"
-        tower_password: "{{ TOWER_PASS }}"
+#        tower_host: "{{ TOWER_HOST }}"
+#        tower_username: "{{ TOWER_USER }}"
+#        tower_password: "{{ TOWER_PASS }}"
       loop:
         - { 'name': 'YUM - update', 'tag': 'update' }
         - { 'name': 'YUM - security', 'tag': 'sec' }
