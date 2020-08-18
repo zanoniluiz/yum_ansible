@@ -24,20 +24,18 @@
 
     - name: Create Job Template with survey
       tower_job_template:
-        name: "{{ item.name }}"
+        name: "TESTE - Install Packages"
         description: "Job Template for demonstration"
         job_type: run
         inventory: "{{ INVENTORY }}"
         project: "{{ PROJECT }}"
         playbook: yum.yaml
         credential: "{{ CREDENTIAL }}"
-        job_tags: "{{ item.tag }}"
+        job_tags: "install"
         become_enabled: yes
         state: present
         survey_enabled: yes
         survey_spec: "{{ lookup('file', 'template/survey.json') }}"
-      loop:  
-        - { 'name': 'TESTE - Install Packages', 'tag': 'install' }
        
     - name: Configure Workflow Template
       replace:
