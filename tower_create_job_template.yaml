@@ -1,0 +1,33 @@
+---
+- hosts: localhost
+  connection: local
+  gather_facts: false
+  name: Ansible Tower - Job Template Demonstration
+  vars:
+    PROJECT: "YUM PROJECT"
+    CREDENTIAL: "SSH AWS"
+    INVENTORY: "AWS-EC2"
+  tasks:
+
+    - name: Read Vault Vars
+      include_vars: tower_vault.yaml
+
+    - name: Create Job Template 
+      tower_job_template:
+        name: "{{ item.name }}"
+        job_type: run
+        inventory: "{{ INVENTORY }}"
+        project: "{{ PROJECT }}"
+        playbook: yum.yaml
+        credential: "{{ CREDENTIAL }}"
+        job_tags: "{{ item.tag }}"
+        become_enabled: yes
+        state: present
+        tower_host: "{{ TOWER_HOST }}"
+        tower_username: "{{ TOWER_USER }}"
+        tower_password: "{{ TOWER_PASS }}"
+      loop:
+        - { 'name': 'YUM - update', 'tag': 'update' }
+        - { 'name': 'YUM - security', 'tag': 'sec' }
+        - { 'name': 'YUM - bugfix', 'tag': 'bugfix' }
+
