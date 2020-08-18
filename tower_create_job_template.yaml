@@ -3,10 +3,6 @@
   connection: local
   gather_facts: false
   name: Ansible Tower - Job Template Demonstration
-  vars:
-    PROJECT: "YUM PROJECT"
-    CREDENTIAL: "SSH AWS"
-    INVENTORY: "AWS-EC2"
   tasks:
 
     - name: Read Vault Vars
@@ -23,11 +19,9 @@
         job_tags: "{{ item.tag }}"
         become_enabled: yes
         state: present
-#        tower_host: "{{ TOWER_HOST }}"
-#        tower_username: "{{ TOWER_USER }}"
-#        tower_password: "{{ TOWER_PASS }}"
       loop:
-        - { 'name': 'YUM - update', 'tag': 'update' }
-        - { 'name': 'YUM - security', 'tag': 'sec' }
-        - { 'name': 'YUM - bugfix', 'tag': 'bugfix' }
+        - { 'name': 'YUM - Update All Packages', 'tag': 'update' }
+        - { 'name': 'YUM - Update Security Packages', 'tag': 'security' }
+        - { 'name': 'YUM - Update Bugfix Packages', 'tag': 'bugfix' }
+        - { 'name': 'YUM - Install Packages', 'tag': 'install' }
 

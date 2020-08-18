@@ -1,0 +1,64 @@
+[
+  {
+    "organization": "Red Hat Consultant",
+    "asset_relation": {
+      "labels": [],
+      "schedules": [],
+      "workflow_nodes": [
+        {
+          "name": "node0",
+          "unified_job_type": "job",
+          "success_nodes": [],
+          "failure_nodes": [],
+          "unified_job_name": "YUM - Update All",
+          "always_nodes": []
+        },
+        {
+          "name": "node1",
+          "unified_job_type": "inventory_update",
+          "success_nodes": [
+            "node0"
+          ],
+          "failure_nodes": [],
+          "unified_job_name": "AWS_SOURCE",
+          "always_nodes": []
+        },
+        {
+          "name": "node2",
+          "unified_job_type": "project_update",
+          "success_nodes": [
+            "node1"
+          ],
+          "failure_nodes": [],
+          "unified_job_name": "YUM PROJECT",
+          "always_nodes": []
+        }
+      ],
+      "roles": [
+        {
+          "team": [],
+          "name": "Admin",
+          "user": []
+        },
+        {
+          "team": [],
+          "name": "Execute",
+          "user": []
+        },
+        {
+          "team": [],
+          "name": "Read",
+          "user": []
+        },
+        {
+          "team": [],
+          "name": "Approve",
+          "user": []
+        }
+      ],
+      "survey_spec": {}
+    },
+    "asset_type": "workflow",
+    "name": "YUM - Updates Workflow"
+  }
+]
