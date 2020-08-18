@@ -63,9 +63,9 @@
         replace: "{{ item.dest }}"
         backup: true
       loop:
-        - { 'src': 'UPDATE', 'dest': 'UPDATEID'}
-        - { 'src': 'BUGFIX', 'dest': 'BUGFIXID'}
-        - { 'src': 'SECURITY', 'dest': 'SECURITYID'}
+        - { 'src': 'UPDATE', 'dest': "{{ UPDATEID }}" }
+        - { 'src': 'BUGFIX', 'dest': "{{ BUGFIXID }}" }
+        - { 'src': 'SECURITY', 'dest': "{{ SECURITYID }}" }      
 
     - name: Create Workflow Template
       tower_workflow_template:
