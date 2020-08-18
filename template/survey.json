@@ -1,0 +1,14 @@
+[
+          {
+            "question_name": "Package Name",
+            "question_description": "Informe o nome dos pacotes separados por espaco",
+            "required": true,
+            "type": "text",
+            "variable": "packages_list",
+            "min": 0,
+            "max": 1024,
+            "default": "",
+            "choices": "",
+            "new_question": true
+          }
+]

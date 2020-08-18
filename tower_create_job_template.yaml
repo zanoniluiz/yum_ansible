@@ -5,12 +5,10 @@
   name: Ansible Tower - Job Template Demonstration
   tasks:
 
-    - name: Read Vault Vars
-      include_vars: tower_vault.yaml
-
     - name: Create Job Template 
       tower_job_template:
         name: "{{ item.name }}"
+        description: "Job Template for demonstration"
         job_type: run
         inventory: "{{ INVENTORY }}"
         project: "{{ PROJECT }}"
@@ -20,8 +18,37 @@
         become_enabled: yes
         state: present
       loop:
-        - { 'name': 'YUM - Update All Packages', 'tag': 'update' }
-        - { 'name': 'YUM - Update Security Packages', 'tag': 'security' }
-        - { 'name': 'YUM - Update Bugfix Packages', 'tag': 'bugfix' }
-        - { 'name': 'YUM - Install Packages', 'tag': 'install' }
+        - { 'name': 'TESTE - Update All Packages', 'tag': 'update' }
+        - { 'name': 'TESTE - Update Security Packages', 'tag': 'security' }
+        - { 'name': 'TESTE - Update Bugfix Packages', 'tag': 'bugfix' }
 
+    - name: Create Job Template with survey
+      tower_job_template:
+        name: "{{ item.name }}"
+        description: "Job Template for demonstration"
+        job_type: run
+        inventory: "{{ INVENTORY }}"
+        project: "{{ PROJECT }}"
+        playbook: yum.yaml
+        credential: "{{ CREDENTIAL }}"
+        job_tags: "{{ item.tag }}"
+        become_enabled: yes
+        state: present
+        survey_enabled: yes
+        survey_spec: "{{ lookup('file', 'template/survey.json') }}"
+      loop:  
+        - { 'name': 'TESTE - Install Packages', 'tag': 'install' }
+       
+    - name: Configure Workflow Template
+      replace:
+        path: template/workflow.json
+        regexp: 'ORGANIZATION'
+        replace: "{{ ORGANIZATION }}"
+        backup: true
+
+    - name: Create Workflow Template
+      tower_workflow_template:
+        name: TESTE - Update Workflow
+        description: Workflow Template for demonstration
+        organization: "{{ ORGANIZATION }}"
+        schema: "{{ lookup('file', 'template/workflow.json') }}"        

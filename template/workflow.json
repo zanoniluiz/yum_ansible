@@ -1,0 +1,54 @@
+[
+  {
+    "organization": "Red Hat Consulting BR",
+    "asset_relation": {
+      "labels": [],
+      "schedules": [],
+      "workflow_nodes": [
+        {
+          "name": "node0",
+          "unified_job_type": "project_update",
+          "success_nodes": [
+            "node1"
+          ],
+          "failure_nodes": [],
+          "unified_job_name": "YUM PROJECT",
+          "always_nodes": []
+        },
+        {
+          "name": "node1",
+          "unified_job_type": "job",
+          "success_nodes": [],
+          "failure_nodes": [],
+          "unified_job_name": "YUM - Update All Packages",
+          "always_nodes": []
+        }
+      ],
+      "roles": [
+        {
+          "team": [],
+          "name": "Approve",
+          "user": []
+        },
+        {
+          "team": [],
+          "name": "Admin",
+          "user": []
+        },
+        {
+          "team": [],
+          "name": "Execute",
+          "user": []
+        },
+        {
+          "team": [],
+          "name": "Read",
+          "user": []
+        }
+      ],
+      "survey_spec": {}
+    },
+    "asset_type": "workflow",
+    "name": "YUM - Update Workflow"
+  }
+]
