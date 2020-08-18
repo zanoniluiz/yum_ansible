@@ -20,7 +20,7 @@
           "unified_job_type": "job",
           "success_nodes": [],
           "failure_nodes": [],
-          "unified_job_name": "YUM - Update All Packages",
+          "unified_job_name": "TESTE - Update All Packages",
           "always_nodes": []
         }
       ],
