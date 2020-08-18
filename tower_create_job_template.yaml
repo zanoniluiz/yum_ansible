@@ -56,4 +56,4 @@
         description: Workflow Template for demonstration
         organization: "{{ ORGANIZATION }}"
         survey_enabled: no
-        schema: "{{ lookup('file', 'template/workflow.yaml') }}"        
+        schema: "{{ lookup('file', 'template/workflow_schema.json') }}"        
