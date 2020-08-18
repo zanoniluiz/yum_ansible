@@ -14,6 +14,7 @@
           ],
           "failure_nodes": [],
           "unified_job_name": "YUM PROJECT",
+          "identifier": "00f74370-4954-45cd-8fe0-7ade7cbec444",
           "always_nodes": []
         },
         {
@@ -22,6 +23,7 @@
           "success_nodes": [],
           "failure_nodes": [],
           "unified_job_name": "TESTE - Update All Packages",
+          "identifier": "224a3dc6-5f91-4ca3-b72d-42006b707fef",
           "always_nodes": []
         }
       ],
