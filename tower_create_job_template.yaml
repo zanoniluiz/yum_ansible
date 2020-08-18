@@ -19,31 +19,31 @@
         state: present
       register: job_out  
       loop:
-        - { 'name': 'TESTE - Update All Packages', 'tag': 'update' }
-        - { 'name': 'TESTE - Update Security Packages', 'tag': 'security' }
-        - { 'name': 'TESTE - Update Bugfix Packages', 'tag': 'bugfix' }
+        - { 'name': 'YUM - Update All Packages', 'tag': 'update' }
+        - { 'name': 'YUM - Update Security Packages', 'tag': 'security' }
+        - { 'name': 'YUM - Update Bugfix Packages', 'tag': 'bugfix' }
 
     - set_fact:
         UPDATEID: "{{ item.id }}"
-      when: 'item.job_template == "TESTE - Update All Packages"'  
+      when: 'item.job_template == "YUM - Update All Packages"'  
       loop: "{{ job_out.results }}"  
       no_log: true
 
     - set_fact:
         BUGFIXID: "{{ item.id }}"
-      when: 'item.job_template == "TESTE - Update Bugfix Packages"'  
+      when: 'item.job_template == "YUM - Update Bugfix Packages"'  
       loop: "{{ job_out.results }}"  
       no_log: true
 
     - set_fact:
         SECURITYID: "{{ item.id }}"
-      when: 'item.job_template == "TESTE - Update Security Packages"'  
+      when: 'item.job_template == "YUM - Update Security Packages"'  
       loop: "{{ job_out.results }}"
       no_log: true
 
     - name: Create Job Template with survey
       tower_job_template:
-        name: "TESTE - Install Packages"
+        name: "YUM - Install Packages"
         description: "Job Template for demonstration"
         job_type: run
         inventory: "{{ INVENTORY }}"
@@ -69,7 +69,7 @@
 
     - name: Create Workflow Template
       tower_workflow_template:
-        name: TESTE - Update Workflow
+        name: YUM - Update Workflow
         description: Workflow Template for demonstration
         organization: "{{ ORGANIZATION }}"
         survey_enabled: no
