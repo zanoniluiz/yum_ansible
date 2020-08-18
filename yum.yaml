@@ -10,7 +10,7 @@
         state: latest
       register: yumstdout  
       tags:
-      - all
+      - [ never, all ] 
 
     - name: YUM - Update Bugfix Packages
       yum:
@@ -19,7 +19,7 @@
         bugfix: yes
       register: yumstdout  
       tags:
-      - bugfix
+      - [ never, bugfix ]
       
     - name: YUM - Update Security Packages
       yum:
@@ -28,7 +28,7 @@
         security: yes
       register: yumstdout  
       tags:
-      - security
+      - [ never, security ]
 
     - name: YUM - Install Packages
       yum:
@@ -38,7 +38,7 @@
         - "{{ packages_list }}"
       register: yumstdout  
       tags:
-      - install
+      - [ never, install ] 
 
     - debug:
         msg: "{{ yumstdout }}"
