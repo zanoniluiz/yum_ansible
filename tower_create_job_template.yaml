@@ -24,7 +24,9 @@
         - { 'name': 'TESTE - Update Bugfix Packages', 'tag': 'bugfix' }
 
     - debug:
-        msg: "{{ job_template_out.results.id }}"
+        msg: "{{ item.id }}"
+      when: 'item.job_template == "TESTE - Update All Packages"'  
+      loop: "{{ job_template_out.results }}"  
 
     - name: Create Job Template with survey
       tower_job_template:
