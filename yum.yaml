@@ -34,7 +34,8 @@
       yum:
         name: "{{ item }}"
         state: present
-      loop: "{{ packages_list | list }}"
+      loop: 
+        - "{{ packages_list }}"
       register: yumstdout  
       tags:
       - [ never, install ] 
