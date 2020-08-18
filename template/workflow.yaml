@@ -1,0 +1,37 @@
+- asset_relation:
+    labels: []
+    roles:
+    - name: Admin
+      team: []
+      user: []
+    - name: Execute
+      team: []
+      user: []
+    - name: Read
+      team: []
+      user: []
+    - name: Approve
+      team: []
+      user: []
+    schedules: []
+    survey_spec: {}
+    workflow_nodes:
+    - always_nodes: []
+      failure_nodes: []
+      identifier: 
+      name: node0
+      success_nodes: []
+      unified_job_name: TESTE - Update All Packages
+      unified_job_type: job
+    - always_nodes: []
+      failure_nodes: []
+      identifier: 
+      name: node1
+      success_nodes:
+      - node0
+      unified_job_name: YUM PROJECT
+      unified_job_type: project_update
+  asset_type: workflow
+  description: Workflow Template for demonstration
+  name: TESTE - Update Workflow
+  organization: ORGANIZATION
