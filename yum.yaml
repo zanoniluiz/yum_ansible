@@ -1,5 +1,5 @@
 ---
-- hosts: all
+- hosts: instance_state_running
   gather_facts: true
   name: YUM - Update and Install Packages
   tasks:
