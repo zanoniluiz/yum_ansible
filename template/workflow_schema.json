@@ -1,0 +1,12 @@
+[
+  {
+    "project": 10,
+    "id": 10,
+    "success_nodes": [
+      {
+        "id": 11,
+        "job_template": 29
+      }
+    ]
+  }
+]
