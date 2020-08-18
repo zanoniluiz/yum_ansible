@@ -1,6 +1,7 @@
 [
   {
-    "organization": "Red Hat Consulting BR",
+    "organization": "{{ ORGANIZATION }}",
+    "description": "Workflow Template for demonstration",
     "asset_relation": {
       "labels": [],
       "schedules": [],
@@ -27,6 +28,11 @@
       "roles": [
         {
           "team": [],
+          "name": "Read",
+          "user": []
+        },
+        {
+          "team": [],
           "name": "Approve",
           "user": []
         },
@@ -38,11 +44,6 @@
         {
           "team": [],
           "name": "Execute",
-          "user": []
-        },
-        {
-          "team": [],
-          "name": "Read",
           "user": []
         }
       ],
