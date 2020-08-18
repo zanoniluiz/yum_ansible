@@ -47,7 +47,7 @@
     - name: Create Workflow Template
       tower_workflow_template:
         name: TESTE - Update Workflow
-        description: Workflow Template for demonstration
-        organization: "{{ ORGANIZATION }}"
+#        description: Workflow Template for demonstration
+#        organization: "{{ ORGANIZATION }}"
         survey_enabled: no
         schema: "{{ lookup('file', 'template/workflow.json') }}"        
