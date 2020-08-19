@@ -36,12 +36,5 @@ ORGANIZATION: "DEFAULT"
 - YUM - Install Packages (com survey)
 - YUM - Update Workflow
 
-```mermaid
-graph LR
-A(start) --> B[update_all]
-B[update_all] --> C[update_bugfix]
-C[update_bugfix] --> D[update_security] 
-```
-
 
 
