@@ -1,5 +1,5 @@
 ---
-- hosts: instance_state_running
+- hosts: "{{ INV_GROUP }}"
   gather_facts: true
   name: YUM - Update and Install Packages
   tasks:
