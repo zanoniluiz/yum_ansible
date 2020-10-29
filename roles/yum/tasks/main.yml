@@ -1,0 +1,39 @@
+---
+- name: YUM - Update All Packages
+    yum:
+      name: '*'
+      state: latest
+    register: yumstdout  
+    tags:
+    - [ never, all ] 
+
+- name: YUM - Update Bugfix Packages
+   yum:
+     name: '*'
+     state: latest
+     bugfix: yes
+   register: yumstdout  
+   tags:
+   - [ never, bugfix ]
+      
+- name: YUM - Update Security Packages
+    yum:
+      name: '*'
+      state: latest
+      security: yes
+    register: yumstdout  
+    tags:
+    - [ never, security ]
+
+- name: YUM - Install Packages
+    yum:
+      name: "{{ item }}"
+      state: present
+      loop: 
+      - "{{ packages_list.split() }}"
+    register: yumstdout  
+    tags:
+    - [ never, install ] 
+
+- debug:
+    msg: "{{ yumstdout }}"

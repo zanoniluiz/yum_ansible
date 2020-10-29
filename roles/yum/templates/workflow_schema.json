@@ -1,0 +1,18 @@
+[
+  {
+    "success_nodes": [
+      {
+        "success_nodes": [
+          {
+            "id": 120,
+            "job_template": SECURITY
+          }
+        ],
+        "id": 110,
+        "job_template": BUGFIX
+      }
+    ],
+    "id": 100,
+    "job_template": UPDATE
+  }
+]
