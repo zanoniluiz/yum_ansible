@@ -1,0 +1,7 @@
+---
+- hosts: localhost
+  gather_facts: true
+  name: Tower Jobs Automation - Template
+  connection: local
+  roles:
+    - tower-job
