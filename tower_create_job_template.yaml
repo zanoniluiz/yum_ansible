@@ -1,0 +1,76 @@
+---
+- hosts: localhost
+  connection: local
+  gather_facts: false
+  name: Ansible Tower - Job Template Demonstration
+  tasks:
+
+    - name: Create Job Template 
+      tower_job_template:
+        name: "{{ item.name }}"
+        description: "Job Template for demonstration"
+        job_type: run
+        inventory: "{{ INVENTORY }}"
+        project: "{{ PROJECT }}"
+        playbook: yum.yaml
+        credential: "{{ CREDENTIAL }}"
+        job_tags: "{{ item.tag }}"
+        become_enabled: yes
+        state: present
+      register: job_out  
+      loop:
+        - { 'name': 'YUM - Update All Packages', 'tag': 'all' }
+        - { 'name': 'YUM - Update Security Packages', 'tag': 'security' }
+        - { 'name': 'YUM - Update Bugfix Packages', 'tag': 'bugfix' }
+
+    - set_fact:
+        UPDATEID: "{{ item.id }}"
+      when: 'item.job_template == "YUM - Update All Packages"'  
+      loop: "{{ job_out.results }}"  
+      no_log: true
+
+    - set_fact:
+        BUGFIXID: "{{ item.id }}"
+      when: 'item.job_template == "YUM - Update Bugfix Packages"'  
+      loop: "{{ job_out.results }}"  
+      no_log: true
+
+    - set_fact:
+        SECURITYID: "{{ item.id }}"
+      when: 'item.job_template == "YUM - Update Security Packages"'  
+      loop: "{{ job_out.results }}"
+      no_log: true
+
+    - name: Create Job Template with survey
+      tower_job_template:
+        name: "YUM - Install Packages"
+        description: "Job Template for demonstration"
+        job_type: run
+        inventory: "{{ INVENTORY }}"
+        project: "{{ PROJECT }}"
+        playbook: yum.yaml
+        credential: "{{ CREDENTIAL }}"
+        job_tags: "install"
+        become_enabled: yes
+        state: present
+        survey_enabled: yes
+        survey_spec: "{{ lookup('file', 'template/survey.json') }}"
+       
+    - name: Configure Workflow Schema
+      replace:
+        path: template/workflow_schema.json
+        regexp: "{{ item.src }}"
+        replace: "{{ item.dest }}"
+        backup: true
+      loop:
+        - { 'src': 'UPDATE', 'dest': "{{ UPDATEID }}" }
+        - { 'src': 'BUGFIX', 'dest': "{{ BUGFIXID }}" }
+        - { 'src': 'SECURITY', 'dest': "{{ SECURITYID }}" }      
+
+    - name: Create Workflow Template
+      tower_workflow_template:
+        name: YUM - Update Workflow
+        description: Workflow Template for demonstration
+        organization: "{{ ORGANIZATION }}"
+        survey_enabled: no
+        schema: "{{ lookup('file', 'template/workflow_schema.json') }}"        
